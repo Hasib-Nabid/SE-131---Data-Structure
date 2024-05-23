@@ -1,109 +1,128 @@
+/*
+* C program to create a linked list and display the elements in the list
+ */
 #include <stdio.h>
+#include <malloc.h>
 #include <stdlib.h>
 
-struct node
+void main()
 {
-	int num;
-	struct node *ptr;
-};
-typedef struct node NODE;
+  struct node
+    {
+        int num;
+        int *ptr;
+   };
+    typedef struct node NODE;
 
-int main()
-{
-	NODE *head, *first, *temp = NULL;
-	int count = 0;
-	int choice = 1;
-	first = NULL;
+    NODE *head, *first, *temp = 0, *last, *any;
+    int count = 0;
+    int choice = 1;
+    first = 0;
 
-	while (choice)
-	{
-		head = (NODE *)malloc(sizeof(NODE));
-		printf("memory we get = %p\n", (void *)head);
-		printf("Enter a data element to insert into the Linked List\n");
-		scanf("%d", &head->num);
-		head->ptr = NULL;
+    while (choice)
+    {
+        head  = (NODE *)malloc(sizeof(NODE));  //https://www.tutorialspoint.com/c_standard_library/c_function_malloc.htm
+        printf("memory we get = %d\n",head);
+        printf("Enter a data element to insert into the Linked List\n");
+        scanf("%d", &head-> num);
+        if (first != 0)
+        {
+            temp->ptr = head;
+            temp = head;
+        }
+        else
+        {
+            first = temp = head;
+        }
+        fflush(stdin);
+        printf("Do you want to continue(Type 0 to exit or any integer to continue)?\n");
+        scanf("%d", &choice);
 
-		if (first != NULL)
-		{
-			temp->ptr = head;
-			temp = head;
-		}
-		else
-		{
-			first = head;
-			temp = head;
-		}
+    }
+    last=head;
+    temp->ptr = 0;
+    /*  reset temp to the beginning */
+    temp = first;
+    printf("\n status of the linked list is\n");
+    while (temp != 0)
+    {
+        printf("[%d]   [%d]",temp,temp->num);
+        count++;
+        temp = temp->ptr;
+    }
+    printf("[NULL]\n");
+    printf("No. of nodes in the list = %d\n", count);
 
-		printf("Do you want to continue(Type 0 to exit or any integer to continue)?\n");
-		scanf("%d", &choice);
-	}
+    //new node at first
 
-	// Display the status of the linked list
-	temp = first;
-	printf("\nStatus of the linked list is\n");
-	while (temp != NULL)
-	{
-		printf("[%p]   [%d] -> ", (void *)temp, temp->num);
-		count++;
-		temp = temp->ptr;
-	}
-	printf("[NULL]\n");
-	printf("No. of nodes in the list = %d\n", count);
+        head  = (NODE *)malloc(sizeof(NODE));  //https://www.tutorialspoint.com/c_standard_library/c_function_malloc.htm
+        printf("memory we get = %d\n",head);
+        printf("Enter a data element to insert into the Linked List\n");
+        scanf("%d", &head-> num);
+        head-> ptr=first;
+        first=head ;
+         /*  reset temp to the beginning */
+    temp = first;
+    printf("\n status of the linked list is\n");
+    while (temp != 0)
+    {
+        printf("[%d]   [%d]",temp,temp->num);
+        count++;
+        temp = temp->ptr;
+    }
+    printf("[NULL]\n");
+    //new node at last
 
-	// Insertion
-	NODE *newNode = (NODE *)malloc(sizeof(NODE));
-	printf("Enter the position where you want to insert the new node\n");
-	int pos;
-	scanf("%d", &pos);
-	printf("Enter the number for the new node\n");
-	scanf("%d", &(newNode->num));
+//new node at first
 
-	// Reset temp to the beginning
-	temp = first;
-	NODE *prev = NULL;
+        head  = (NODE *)malloc(sizeof(NODE));  //https://www.tutorialspoint.com/c_standard_library/c_function_malloc.htm
+        printf("memory we get = %d\n",head);
+        printf("Enter a data element to insert into the Linked List\n");
+        scanf("%d", &head-> num);
+        head-> ptr=0;
+        last-> ptr=head;
 
-	// Traverse to the position before where we want to insert
-	for (int i = 0; temp != NULL && i < pos; ++i)
-	{
-		prev = temp;
-		temp = temp->ptr;
-	}
+         /*  reset temp to the beginning */
+    temp = first;
+    printf("\n status of the linked list is\n");
+    while (temp != 0)
+    {
+        printf("[%d]   [%d]",temp,temp->num);
+        count++;
+        temp = temp->ptr;
+    }
+    printf("[NULL]\n");
 
-	// Insert the new node
-	if (prev == NULL)
-	{ // Insert at the beginning
-		newNode->ptr = first;
-		first = newNode;
-	}
-	else if (temp == NULL)
-	{ // Insert at the end
-		prev->ptr = newNode;
-		newNode->ptr = NULL;
-	}
-	else
-	{ // Insert in the middle
-		newNode->ptr = temp;
-		prev->ptr = newNode;
-	}
+    //new node at middle
+    int searchv;
+    printf("Enter a value to search : ");
+    scanf("%d",&searchv);
+    temp = first;
+    printf("\n status of the linked list is\n");
+    while (temp != 0)
+    {
+        if(temp->num==searchv)
+        {
+            any=temp->ptr;
+            break;
+        }
+        temp = temp->ptr;
+    }
 
-	// Display the status of the linked list after insertion
-	temp = first;
-	printf("\nStatus of the linked list after insertion is\n");
-	while (temp != NULL)
-	{
-		printf("[%p]   [%d] -> ", (void *)temp, temp->num);
-		temp = temp->ptr;
-	}
-	printf("[NULL]\n");
+     head  = (NODE *)malloc(sizeof(NODE));  //https://www.tutorialspoint.com/c_standard_library/c_function_malloc.htm
+        printf("memory we get = %d\n",head);
+        printf("Enter a data element to insert into the Linked List\n");
+        scanf("%d", &head-> num);
+        head-> ptr=any;
+        temp->ptr=head;
+    temp = first;
+    printf("\n status of the linked list is\n");
+    while (temp != 0)
+    {
+        printf("[%d]   [%d]",temp,temp->num);
+        count++;
+        temp = temp->ptr;
+    }
+    printf("[NULL]\n");
 
-	// Free the allocated memory
-	temp = first;
-	while (temp != NULL)
-	{
-		NODE *next = temp->ptr;
-		free(temp);
-		temp = next;
-	}
-
-	return 0;
 }
