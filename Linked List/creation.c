@@ -43,8 +43,6 @@ int main()
 
 
 	printf("[%d]   [%d][%d]   [%d][%d]   [%d][%d]",head,head->data,head->next,second->data,second->next,third->data,third->next);
-
-
 	return 0;
 }
 
